@@ -1,0 +1,3 @@
+requests
+firebase-admin
+google-api-python-client
