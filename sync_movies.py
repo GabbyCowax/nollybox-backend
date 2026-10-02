@@ -1,20 +1,54 @@
 import firebase_admin
-from firebase_admin import firestore
+from firebase_admin import firestore, credentials
 import requests
+import os
+import json
 
-# 1. Initialize Firebase directly using your Project ID
-# Ensure your environment has credentials or use a service account key file for Render
-firebase_admin.initialize_app(options={'projectId': 'nollybox-ab75a'})
+# 1. Initialize Firebase using individual Environment Variables
+try:
+    project_id = os.environ.get('FIREBASE_PROJECT_ID')
+    private_key = os.environ.get('FIREBASE_PRIVATE_KEY')
+    client_email = os.environ.get('FIREBASE_CLIENT_EMAIL')
+
+    if not all([project_id, private_key, client_email]):
+        print(f"Error: Missing Firebase credentials in Environment Variables.")
+        print(f"Project ID: {'Set' if project_id else 'Missing'}")
+        print(f"Client Email: {'Set' if client_email else 'Missing'}")
+        print(f"Private Key: {'Set' if private_key else 'Missing'}")
+        exit(1)
+
+    # Clean the private key (handle escaped newlines)
+    formatted_key = private_key.replace('\\n', '\n')
+
+    creds_data = {
+        "type": "service_account",
+        "project_id": project_id,
+        "private_key": formatted_key,
+        "client_email": client_email,
+        "token_uri": "https://oauth2.googleapis.com/token",
+    }
+
+    cred = credentials.Certificate(creds_data)
+    firebase_admin.initialize_app(cred)
+    print("Firebase successfully initialized with environment variables.")
+
+except Exception as e:
+    print(f"Firebase Init Critical Error: {e}")
+    exit(1)
+
 db = firestore.client()
 
-# 2. Configuration (Replace with your actual YouTube API Key and target Nollywood Channel ID)
-YOUTUBE_API_KEY = 'AIzaSyAFy6L9oNrurBt4TEROcMdHurIotvrAg2s'
+# 2. Configuration
+YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
+if not YOUTUBE_API_KEY:
+    print("Error: YOUTUBE_API_KEY is missing!")
+    exit(1)
 
-# You can map Channel IDs to specific Genres for NollyBox
+# Nollywood Channel IDs
 CHANNELS = {
     'UCi8vPG6uMxIjoZMhLLX2BkQ': 'Epic',    # NollywoodPicturestv
     'UCX76kE7yZ07m7XmO4_68L0w': 'Drama',   # RealnollyTV
-    'UC-6rjKkoJdIyEYfvBfSIG_Q': 'Comedy'  # FAAN TV (SceneOneTV)
+    'UC-6rjKkoJdIyEYfvBfSIG_Q': 'Comedy'  # FAAN TV
 }
 
 def sync_latest_movies():
@@ -22,51 +56,46 @@ def sync_latest_movies():
 
     for channel_id, genre in CHANNELS.items():
         print(f'Syncing channel {channel_id} for genre {genre}...')
-
-        # Call YouTube Data API v3 search endpoint to get recent videos from the channel
         url = f'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={channel_id}&order=date&maxResults=10&key={YOUTUBE_API_KEY}'
 
-        response = requests.get(url)
-        data = response.json()
+        try:
+            response = requests.get(url)
+            data = response.json()
 
-        # Check if the API returned items successfully
-        if 'items' not in data:
-            print(f'Error fetching from YouTube API for channel {channel_id}:', data.get('error', 'Unknown error'))
-            continue
-
-        for item in data['items']:
-            video_id = item['id'].get('videoId')
-            if not video_id:
+            if 'items' not in data:
+                print(f'Error fetching from YouTube API for channel {channel_id}:', data.get('error', 'Unknown error'))
                 continue
 
-            snippet = item['snippet']
-            title = snippet['title']
-            description = snippet['description']
+            for item in data['items']:
+                video_id = item['id'].get('videoId')
+                if not video_id:
+                    continue
 
-            # Automatically generate the public YouTube thumbnail poster URL
-            poster_url = f'https://img.youtube.com/vi/{video_id}/hqdefault.jpg'
-            # Video URL for the player
-            video_url = f'https://www.youtube.com/watch?v={video_id}'
+                snippet = item['snippet']
+                title = snippet['title']
+                description = snippet['description']
+                poster_url = f'https://img.youtube.com/vi/{video_id}/hqdefault.jpg'
+                video_url = f'https://www.youtube.com/watch?v={video_id}'
 
-            # Reference your Firestore 'movies' collection using the YouTube video ID as the document ID
-            movie_ref = db.collection('movies').document(video_id)
+                movie_ref = db.collection('movies').document(video_id)
 
-            # Check if this movie already exists in Firestore to avoid duplicate entries
-            if not movie_ref.get().exists:
-                movie_ref.set({
-                    'title': title,
-                    'description': description,
-                    'youtubeVideoId': video_id,
-                    'posterUrl': poster_url,
-                    'bannerUrl': poster_url, # Using same image for banner
-                    'videoUrl': video_url,
-                    'genres': [genre, 'Nollywood'], # Matches Android app's list requirement
-                    'createdAt': firestore.SERVER_TIMESTAMP,
-                    'featured': False # You can set this manually in Firebase for top slider
-                })
-                print(f'Successfully added new movie: {title}')
-            else:
-                print(f'Movie already exists in database: {title}')
+                if not movie_ref.get().exists:
+                    movie_ref.set({
+                        'title': title,
+                        'description': description,
+                        'youtubeVideoId': video_id,
+                        'posterUrl': poster_url,
+                        'bannerUrl': poster_url,
+                        'videoUrl': video_url,
+                        'genres': [genre, 'Nollywood'],
+                        'createdAt': firestore.SERVER_TIMESTAMP,
+                        'featured': False
+                    })
+                    print(f'Successfully added new movie: {title}')
+                else:
+                    print(f'Movie already exists in database: {title}')
+        except Exception as e:
+            print(f"Error syncing channel {channel_id}: {e}")
 
     print('Sync process completed successfully!')
 

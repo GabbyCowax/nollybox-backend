@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_height">56dp</dimen>
+    <dimen name="search_bar_height">48dp</dimen>
+    <dimen name="hero_banner_height">320dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="padding_standard">16dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="download_indicator_size">54dp</dimen>
+    <dimen name="download_icon_size">24dp</dimen>
+
+    <!-- 🚀 Grid Column Counts -->
+    <integer name="movie_grid_columns">3</integer>
+</resources>

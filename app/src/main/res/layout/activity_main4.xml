@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity4">
+
+    <!-- 2. Fragment Container with scrolling behavior -->
+
+    <!-- 1. Header AppBarLayout -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="56dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_main"
+        android:paddingTop="32dp"
+        app:elevation="4dp">
+
+        <!-- Hidden actual Toolbar for Menu handling -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_header_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/bg_main">
+
+            <!-- Search Row -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingHorizontal="12dp">
+
+                <!-- Logo (Left) -->
+                <ImageView
+                    android:id="@+id/iv_logo_main"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/logos"
+                    android:contentDescription="@string/logo_desc"
+                    android:scaleType="centerCrop" />
+
+                <!-- Search Bar (Center) -->
+                <LinearLayout
+                    android:id="@+id/ll_search_bar_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/search_bar_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_toEndOf="@id/iv_logo_main"
+                    android:layout_toStartOf="@id/iv_action_top"
+                    android:background="@drawable/selector_tv_focusable"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/padding_standard"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@android:drawable/ic_menu_search"
+                        android:contentDescription="@string/action_search"
+                        app:tint="@color/tab_unselected" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/search_hint"
+                        android:textColor="@color/tab_unselected"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_search_inline"
+                        android:textColor="@color/accent_gold"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_action_top"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_tv_focusable"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_refresh"
+                    android:contentDescription="@string/refresh_app"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:tint="@color/accent_gold"
+                    android:elevation="4dp" />
+
+            </RelativeLayout>
+
+            <!-- Categories Tab (Scrolling) -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:paddingVertical="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
+
+                    <TextView
+                        android:id="@+id/tab_fightzone"
+                        style="@style/CategoryTabText"
+                        android:text="@string/category_fightzone" />
+                    <TextView
+                        android:id="@+id/tab_trending"
+                        style="@style/CategoryTabText"
+                        android:text="@string/category_trending"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tab_movie"
+                        style="@style/CategoryTabText"
+                        android:text="@string/category_movie" />
+                    <TextView
+                        android:id="@+id/tab_tv"
+                        style="@style/CategoryTabText"
+                        android:text="@string/category_tv" />
+                    <TextView
+                        android:id="@+id/tab_midnight"
+                        style="@style/CategoryTabText"
+                        android:text="@string/category_midnight" />
+                    <TextView
+                        android:id="@+id/tab_anime"
+                        style="@style/CategoryTabText"
+                        android:text="@string/category_anime" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#000000"
+        app:itemIconTint="@color/selector_nav_item"
+        app:itemTextColor="@color/selector_nav_item"
+        app:menu="@menu/bottom_nav_menu_extended" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_premium_splash"
+    tools:context=".MainActivity">
+
+    <!-- Decorative Glow behind logo -->
+    <View
+        android:id="@+id/v_glow"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/logo_glow"
+        app:layout_constraintBottom_toBottomOf="@id/logo_card"
+        app:layout_constraintEnd_toEndOf="@id/logo_card"
+        app:layout_constraintStart_toStartOf="@id/logo_card"
+        app:layout_constraintTop_toTopOf="@id/logo_card" />
+
+    <!-- Logo / Icon Container -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/logo_card"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        app:cardBackgroundColor="#121212"
+        app:cardCornerRadius="90dp"
+        app:cardElevation="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:strokeWidth="0dp">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/logo_desc"
+            android:src="@drawable/logos"
+            android:scaleType="fitXY" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- App Name with Premium Spacing -->
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/app_name_caps"
+        android:textColor="@color/white"
+        android:textSize="38sp"
+        android:letterSpacing="0.2"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo_card" />
+
+    <!-- Cinematic Tagline -->
+    <TextView
+        android:id="@+id/tv_tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/tagline"
+        android:textColor="#AAAAAA"
+        android:textSize="14sp"
+        android:letterSpacing="0.05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
+
+    <!-- Elegant Loading Animation -->
+    <ProgressBar
+        android:id="@+id/pb_splash"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="64dp"
+        android:indeterminateTint="@color/accent_gold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:alpha="0.6"
+        android:fontFamily="sans-serif-condensed"
+        android:text="NIGERIA'S NO. 1 CINEMA APP"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:letterSpacing="0.3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

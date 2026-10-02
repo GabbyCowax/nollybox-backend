@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "847982171558",
+    "project_id": "nollybox-ab75a",
+    "storage_bucket": "nollybox-ab75a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847982171558:android:1817cdacf4f93c812beb67",
+        "android_client_info": {
+          "package_name": "com.company.Nollybox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2cXvf2dsjXFHEU_d5z7fFw-5gdJPIHEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847982171558:android:17559befcf30d2712beb67",
+        "android_client_info": {
+          "package_name": "com.example.nollybox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2cXvf2dsjXFHEU_d5z7fFw-5gdJPIHEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

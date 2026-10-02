@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_splash">#121212</color>
+    <color name="input_bg">#1E1E1E</color>
+    <color name="accent_gold">#FFD700</color>
+    <color name="accent_gold_variant">#B8860B</color>
+    <color name="gray_text">#888888</color>
+    <color name="error_red">#CF6679</color>
+
+    <!-- Premium UI Colors -->
+    <color name="bg_main">#121212</color>
+    <color name="bg_search_bar">#2A2A2A</color>
+    <color name="tab_unselected">#888888</color>
+    <color name="glass_white">#1AFFFFFF</color>
+    <color name="glass_border">#22FFFFFF</color>
+    <color name="hero_card_bg">#CC1A1A1A</color>
+    <color name="status_green">#2ECC71</color>
+    <color name="status_red">#FF3B30</color>
+    <color name="text_hint">#666666</color>
+    <color name="text_secondary">#AAAAAA</color>
+</resources>

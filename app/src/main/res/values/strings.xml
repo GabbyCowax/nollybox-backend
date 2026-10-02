@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">NollyBox</string>
+    <string name="app_name_caps">NOLLYBOX</string>
+    <string name="tagline">Your Nollywood, Your Box Office</string>
+    <string name="loading_msg">Initializing Experience&#8230;</string>
+    <string name="logo_desc">NollyBox Logo</string>
+    <string name="default_web_client_id">847982171558-c1ube9mu3r5jru23i6av56402ii143rf.apps.googleusercontent.com</string>
+
+    <!-- Sign In -->
+    <string name="sign_in_title">Welcome Back</string>
+    <string name="sign_in_subtitle">Log in to your account</string>
+    <string name="email_hint">Email Address</string>
+    <string name="password_hint">Password</string>
+    <string name="btn_sign_in">SIGN IN</string>
+    <string name="btn_google_sign_in">Continue with Google</string>
+    <string name="or_divider">OR</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="no_account">Don\'t have an account? </string>
+    <string name="sign_up_link">Sign Up</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up_title">Create Account</string>
+    <string name="sign_up_subtitle">Join the NollyBox family</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="btn_sign_up">SIGN UP</string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="sign_in_link">Sign In</string>
+
+    <!-- Dashboard -->
+    <string name="nav_home">Home</string>
+    <string name="nav_trending">Trending</string>
+    <string name="nav_profile">Profile</string>
+    <string name="welcome_msg">Welcome to NollyBox</string>
+    <string name="logout">Logout</string>
+
+    <!-- Dashboard Strings -->
+    <string name="category_all">All</string>
+    <string name="category_epic">Epic</string>
+    <string name="category_drama">Drama</string>
+    <string name="category_comedy">Comedy</string>
+    <string name="latest_releases">Latest Releases</string>
+    <string name="full_catalog">Full Catalog</string>
+    <string name="btn_play_now">PLAY NOW</string>
+    <string name="btn_download">DOWNLOAD</string>
+    <string name="download_started">Download started&#8230;</string>
+    <string name="added_to_watchlist">Added to Watchlist</string>
+    <string name="removed_from_watchlist">Removed from Watchlist</string>
+    <string name="desc_favorite">Add to Watchlist</string>
+    <string name="tab_watchlist">Watchlist</string>
+    <string name="tab_downloads">Downloads</string>
+    <string name="library_title">My Library</string>
+    <string name="recommendations_title">You Might Also Like</string>
+    <string name="cast_title">Top Nollywood Stars</string>
+    <string name="movie_title_placeholder">Movie Title</string>
+    <string name="movie_genre_placeholder">Genre</string>
+    <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
+    <string name="sort_newest">Newest First</string>
+    <string name="sort_popular">Most Popular</string>
+
+    <!-- New Premium Dashboard Strings -->
+    <string name="search_hint">Search movies...</string>
+    <string name="category_fightzone">FightZone</string>
+    <string name="category_trending">Trending</string>
+    <string name="category_movie">Movie</string>
+    <string name="category_tv">TV</string>
+    <string name="category_midnight">Midnight 18+</string>
+    <string name="category_anime">Anime</string>
+    <string name="btn_search_inline">Search</string>
+    <string name="year_placeholder">Recent</string>
+    <string name="back_desc">Go Back</string>
+    <string name="fullscreen_desc">Fullscreen</string>
+    <string name="btn_pause">Pause</string>
+    <string name="btn_resume">Resume</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="download_progress_format">%1$d%%</string>
+    <string name="zero_percent">0%</string>
+    <string name="downloaded">DOWNLOADED</string>
+    <string name="btn_back">Back</string>
+    <string name="error_playing_video">Error playing video</string>
+    <string name="resume_playback">Resuming from last position</string>
+    <string name="unsupported_format">Unsupported video format</string>
+    <string name="downloading_indeterminate">Downloading...</string>
+    <string name="error_network">Network error: check connection</string>
+    <string name="error_insufficient_space">Insufficient storage space</string>
+    <string name="error_download_failed">Download failed</string>
+    <string name="downloading_label">Downloading</string>
+    <string name="refresh_app">Refresh App</string>
+    <string name="refresh_content">Refresh Content</string>
+    <string name="experience_refreshed">Experience Refreshed</string>
+    <string name="content_refreshed">Content Refreshed</string>
+
+    <!-- Download Quality Selection -->
+    <string name="download_quality_title">Select Download Quality</string>
+    <string name="quality_480p">480p (Standard)</string>
+    <string name="quality_480p_desc">Smaller file size</string>
+    <string name="quality_720p">720p (HD)</string>
+    <string name="quality_720p_desc">Best for mobile</string>
+    <string name="quality_1080p">1080p (Full HD)</string>
+    <string name="quality_1080p_desc">Crystal clear</string>
+    <string name="optimizing_player">Optimizing player, please tap again...</string>
+    <string name="tv_welcome_format">Welcome to NollyBox, %s</string>
+    <string name="title_activity_main7">MainActivity7</string>
+</resources>
