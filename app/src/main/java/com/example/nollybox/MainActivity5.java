@@ -478,10 +478,43 @@ public class MainActivity5 extends AppCompatActivity {
     }
 
     private void triggerFullscreen() {
-        if (videoId == null || videoId.isEmpty() || isFinishing()) return;
-        Intent it = new Intent(MainActivity5.this, PlayerActivity.class);
-        it.putExtra("videoId", videoId);
-        startActivity(it);
+        if (isFinishing()) return;
+
+        // 🚀 FAST PATH: Direct MP4 link already cached
+        if (downloadUrl != null && (downloadUrl.startsWith("http://") || downloadUrl.startsWith("https://"))) {
+            Intent it = new Intent(MainActivity5.this, PlayerActivity.class);
+            it.putExtra("streamUrl", downloadUrl);
+            it.putExtra("videoId", videoId);
+            startActivity(it);
+            return;
+        }
+
+        // 🚀 DYNAMIC ARCHIVE.ORG RESOLUTION & CACHING
+        Toast.makeText(this, "Resolving HD Stream...", Toast.LENGTH_SHORT).show();
+        ArchiveStreamResolver.resolveAndCacheStream(videoId, title, new ArchiveStreamResolver.ResolveCallback() {
+            @Override
+            public void onSuccess(String mp4DirectUrl) {
+                if (isFinishing()) return;
+                downloadUrl = mp4DirectUrl;
+                Intent it = new Intent(MainActivity5.this, PlayerActivity.class);
+                it.putExtra("streamUrl", mp4DirectUrl);
+                it.putExtra("videoId", videoId);
+                startActivity(it);
+            }
+
+            @Override
+            public void onError(String error) {
+                if (isFinishing()) return;
+                // Fallback to YouTube trailer player
+                if (videoId != null && !videoId.isEmpty()) {
+                    Intent it = new Intent(MainActivity5.this, PlayerActivity.class);
+                    it.putExtra("videoId", videoId);
+                    startActivity(it);
+                } else {
+                    Toast.makeText(MainActivity5.this, "Unable to resolve stream", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void saveToRecent() {

@@ -52,11 +52,16 @@ public class PlayerActivity extends AppCompatActivity {
 
             String videoId = getIntent().getStringExtra("videoId");
             String localPath = getIntent().getStringExtra("localPath");
+            String streamUrl = getIntent().getStringExtra("streamUrl");
 
-            Log.d(TAG, "Starting playback - ID: " + videoId + ", Path: " + localPath);
+            Log.d(TAG, "Starting playback - ID: " + videoId + ", Path: " + localPath + ", Stream: " + streamUrl);
 
-            if (localPath != null && !localPath.isEmpty() && new File(localPath).exists()) {
+            if (streamUrl != null && (streamUrl.startsWith("http://") || streamUrl.startsWith("https://"))) {
+                playDirectStream(streamUrl);
+            } else if (localPath != null && !localPath.isEmpty() && new File(localPath).exists()) {
                 playOffline(localPath);
+            } else if (videoId != null && (videoId.startsWith("http://") || videoId.startsWith("https://"))) {
+                playDirectStream(videoId);
             } else if (videoId != null && !videoId.isEmpty()) {
                 playOnline(extractYoutubeId(videoId));
             } else {
@@ -80,6 +85,28 @@ public class PlayerActivity extends AppCompatActivity {
             if (parts.length > 1) return parts[1].split("\\?")[0];
         }
         return clean;
+    }
+
+    @OptIn(markerClass = UnstableApi.class)
+    private void playDirectStream(String url) {
+        try {
+            if (localPlayerView == null) return;
+            localPlayerView.setVisibility(View.VISIBLE);
+            if (youTubePlayerView != null) youTubePlayerView.setVisibility(View.GONE);
+
+            if (exoPlayer != null) exoPlayer.release();
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            localPlayerView.setPlayer(exoPlayer);
+
+            MediaItem mediaItem = MediaItem.fromUri(Uri.parse(url));
+            exoPlayer.setMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.play();
+        } catch (Exception e) {
+            Log.e(TAG, "Direct MP4 stream failed", e);
+            String vId = getIntent().getStringExtra("videoId");
+            if (vId != null) playOnline(extractYoutubeId(vId));
+        }
     }
 
     @OptIn(markerClass = UnstableApi.class)
